@@ -1,73 +1,43 @@
-Public Class ArrayQueue
-	Dim queue() As Object
-	Dim capacity As Integer
-	Dim numItems As Integer = 0
-	Dim front As Integer = 0
-	Dim rear As Integer = -1
+Imports System.Collections
+Public Class MyStack
+	Private ToS As Integer
+	Private list As New ArrayList()
 	
 	Public Sub New()
-		ReDim queue(99)
-		capacity = 100
+		Tos = -1
 	End Sub
 	
-	Public Sub New (ByVal maxSize As Integer)
-		ReDim queue(maxSize - 1)
-		capacity = maxSize
-	End Sub
-	
-	Public Sub EnQueue(ByVal item As object)
-		front = (front + 1) Mod capacity
-		queue(front) = item
-		numItems = numItems + 1
-	End Sub
-	
-	Public Function DeQueue() As object
-		Dim toReturn As object = queue(rear)
-		queue(rear) = NoThing
-		rear = (rear + 1) Mod capacity
-		numItems = numItems -1
-		Return toReturn
+	Function Count() As Integer
+		Return list.Count
 	End Function
 	
-	Public Function isEmpty() As Boolean
-		If (numItems = 0 ) Then
+	Public Sub Push(ByVal value As Object)
+		list.Add(value)
+		ToS += 1
+	End Sub
+	
+	Public Function Pop() As Object
+		Dim obj As Object = list.Item(ToS)
+		list.RemoveAt(ToS)
+		Tos -= 1
+		Return obj
+	End Function
+	
+	Public Sub Clear()
+		list.Clear()
+		Tos = -1
+	End Sub
+	
+	Public Function Peak() As Object
+		Return list.Item(ToS)
+	End Function
+	
+	Public Function IsEmpty() As Boolean
+		If ToS = -1 Then
 			Return True
 		Else
 			Return False
 		End If
 	End Function
-	
-	Public Function isFull() As Boolean
-		If (numItems = capacity) Then
-			Return True
-		Else
-			Return False
-		End If
-	End Function
-	
-	Public Function Count() As Integer
-		Return numItems
-	End Function
-	
-	Public Sub PrintItems()
-		For i As Integer = 0 To queue.GetUpperBound(0)
-			Console.WriteLine(queue(i))
-		Next
-		Console.WriteLine()
-	End Sub
-	
-End Class
 
-Module ArrayQueueExample
-	
-	Sub Main()
-		Dim q As New ArrayQueue(4)
-		q.EnQueue("Mostafa")
-		q.Enqueue("Ali")
-		q.Enqueue("Ahmad")
-		q.PrintItems()
-		q.DeQueue()
-		q.PrintItems()
-	End Sub
-	
-End Module
+End Class
