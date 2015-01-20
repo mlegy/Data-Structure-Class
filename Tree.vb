@@ -1,5 +1,5 @@
 'the class defindes the node (as data and two Child nodes{right and left})
-Module BinarySearch
+Module BinarySearchTree
 	Sub Main()	
 		Dim nums As MyBinarySearchTree
 		
