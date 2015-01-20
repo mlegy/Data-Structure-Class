@@ -1,5 +1,5 @@
 'the class defindes the node (as data and two Child nodes{right and left})
-Module BinarySearchTree
+Module BinarySearch
 	Sub Main()	
 		Dim nums As MyBinarySearchTree
 		
@@ -26,8 +26,8 @@ Module BinarySearchTree
 		Dim min As Integer = nums.FindMin()
 		Dim max As Integer = nums.FindMax()
 		
-		Console.WriteLine("The maximum value in the tree is: " &max)
-		Console.WriteLine("The minimum value in the tree is: " &min)
+		Console.WriteLine("The maximum value in the tree is: " & max)
+		Console.WriteLine("The minimum value in the tree is: " & min)
 		
 		Dim value1 As Integer = 37
 		Dim value2 As Integer = 4
@@ -40,7 +40,7 @@ Module BinarySearchTree
 		End If
 		
 		node = nums.Find(value2)
-		If(IsNoThing(value2)) Then
+		If(IsNoThing(node)) Then
 			Console.WriteLine("Value " & value2 & "doesn't exist")
 		Else
 			Console.WriteLine("Value " & value2 & "exists in the tree")
@@ -78,14 +78,14 @@ Public Class MyBinarySearchTree
 		Dim newNode As TNode
 		newNode.iData = i
 		
-		If (root is NoThing)
+		If (root is NoThing) Then
 			root = newNode
 		Else
 			Dim current As TNode = root
 			Dim parent As TNode
 			while (True)
 				parent = current
-				If (i < current.iData)
+				If (i < current.iData) Then
 					current = current.Left
 					If (current is NoThing) Then
 						parent.Left = newNode
@@ -93,15 +93,12 @@ Public Class MyBinarySearchTree
 					End If
 				Else
 					current = current.Right
-					If (i > current.iData)
-						current = current.Right
-						If (current is NoThing)
-							parent.Right = newNode
-							Exit While
-						End If
+					If (current is NoThing) Then
+						parent.Right = newNode
+						Exit While
 					End If
 				End If
-		End While
+			End While
 		End If
 	End Sub
 	
@@ -163,5 +160,6 @@ Public Class MyBinarySearchTree
 				Return NoThing
 			End If
 		End While
+		Return current
 	End Function
 End Class
